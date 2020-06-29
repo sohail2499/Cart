@@ -12,14 +12,61 @@ class CartItem extends React.Component {
             img: ''
         }
         // this.increaseQuantity = this.increaseQuantity.bind(this);
+        this.testing();
     }
+    testing () {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 5000);
+    })
+
+    promise.then(() => {
+      // setState acts like a synchronus call and will render 3 times and state will also get updated
+
+      this.setState({ qty: this.state.qty + 10 });
+
+      this.setState({ qty: this.state.qty + 10 });
+
+      this.setState({ qty: this.state.qty + 10 });
+
+      console.log('state', this.state);
+    });
+  }
+  
+
+
     increaseQuantity = () =>{
         // this.state.qty+=1;
         // console.log('this',this.state)
-        //setstate form 1-- object
-        this.setState({
-            qty:this.state.qty+1
-        })
+        //setState form 1-- object merge with our object by shallow merging wont touch any other
+            // this.setState({
+            //     qty:this.state.qty+1
+            // });
+           
+        //setState form 2---function-- use this when we require from the previous state
+        this.setState((prevState) =>{
+            return{
+                qty:prevState.qty +1
+            }
+        // },()=>{// in forme 1 also we can perform the call back
+        //     console.log('this.state', this.state);
+        // });
+    });
+
+    }
+    decreaseQuantity = () =>{
+       const { qty }= this.state;
+       if(qty===0){
+           return;
+       }
+        this.setState((prevState) =>{
+            return{
+                qty:prevState.qty -1
+                
+            }
+        });
+
     }
     render(){
         const {price,title,qty}=this.state;
@@ -44,7 +91,7 @@ class CartItem extends React.Component {
                     alt="decrease" 
                     className="action-icons" 
                     src="https://image.flaticon.com/icons/svg/1828/1828899.svg"
-                    // onClick={this.decreaseQuantity}
+                    onClick={this.decreaseQuantity}
                     />
                     <img 
                     alt="delete" 
