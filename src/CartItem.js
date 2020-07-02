@@ -26,7 +26,7 @@ class CartItem extends React.Component {
   
 
 
-    increaseQuantity = () =>{
+    // increaseQuantity = () =>{
         // this.state.qty+=1;
         // console.log('this',this.state)
         //setState form 1-- object merge with our object by shallow merging wont touch any other
@@ -35,32 +35,33 @@ class CartItem extends React.Component {
             // });
            
         //setState form 2---function-- use this when we require from the previous state
-        this.setState((prevState) =>{
-            return{
-                qty:prevState.qty +1
-            }
-        // },()=>{// in forme 1 also we can perform the call back
+    //     this.setState((prevState) =>{
+    //         return{
+    //             qty:prevState.qty +1
+    //         }
+         // },()=>{// in forme 1 also we can perform the call back
         //     console.log('this.state', this.state);
-        // });
-    });
+          // });
+    // });
 
-    }
-    decreaseQuantity = () =>{
-       const { qty }= this.state;
-       if(qty===0){
-           return;
-       }
-        this.setState((prevState) =>{
-            return{
-                qty:prevState.qty -1
+    // }
+    // decreaseQuantity = () =>{
+    //    const { qty }= this.state;
+    //    if(qty===0){
+    //        return;
+    //    }
+    //     this.setState((prevState) =>{
+    //         return{
+    //             qty:prevState.qty -1
                 
-            }
-        });
+    //         }
+    //     });
 
-    }
+    // }
     render(){
         console.log('this.props',this.props);
         const {price,title,qty}=this.props.product;
+        const {product,onIncreaseQuantity,onDecreaseQuantity, onDeleteProduct}=this.props;
         return(
              <div className="cart-item">
                 <div className= "left-block">
@@ -76,19 +77,19 @@ class CartItem extends React.Component {
                     alt="increase" 
                     className="action-icons" 
                     src="https://image.flaticon.com/icons/svg/1828/1828919.svg"
-                    onClick={this.increaseQuantity}
+                    onClick={()=>onIncreaseQuantity(product)}
                     />
                     <img 
                     alt="decrease" 
                     className="action-icons" 
                     src="https://image.flaticon.com/icons/svg/1828/1828899.svg"
-                    onClick={this.decreaseQuantity}
+                    onClick={()=>onDecreaseQuantity(product)}
                     />
                     <img 
                     alt="delete" 
                     className="action-icons" 
                     src="https://image.flaticon.com/icons/svg/3096/3096687.svg"
-                    // onClick={this.deleteQuantity}
+                    onClick={()=>onDeleteProduct(product.id)}
                     />
                 </div>
                 </div>
