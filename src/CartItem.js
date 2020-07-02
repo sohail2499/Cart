@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CartItem extends React.Component {
+const CartItem =(props)=> {
     //need to call the constructor of the parent class if inheriting
   
     
@@ -58,14 +58,14 @@ class CartItem extends React.Component {
     //     });
 
     // }
-    render(){
-        console.log('this.props',this.props);
-        const {price,title,qty}=this.props.product;
-        const {product,onIncreaseQuantity,onDecreaseQuantity, onDeleteProduct}=this.props;
+    
+        
+        const {price,title,qty}=props.product;
+        const {product,onIncreaseQuantity,onDecreaseQuantity, onDeleteProduct}=props;
         return(
              <div className="cart-item">
                 <div className= "left-block">
-                    <img style={style.image}/>
+                    <img style={style.image} src={product.img}/>
                 </div>
                 <div className= "right-block">
                     <div style={{fontSize:25 } }>{title}</div>
@@ -95,7 +95,7 @@ class CartItem extends React.Component {
                 </div>
             </div>
         );
-    }
+    
 }
 // we  cant style like this but can style by using an object 
 const style ={
